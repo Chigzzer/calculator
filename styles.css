@@ -1,6 +1,21 @@
+*{
+    font-weight: 800;
+    font-size: larger;
+    margin: 0;
+    padding: 0;
+}
+
 body{
-    width: 100vw;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainBody{
+    width: 100vw;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,8 +25,8 @@ body{
 #calculator{
     display: flex;
     flex-direction: column;
-    width: 10%;
-    height: 25%;
+    min-width: 500px;
+    height: 600px;
     justify-content: center;
     align-items: center;
     border: 2px solid black;
@@ -20,18 +35,12 @@ body{
 #bottom{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 80%;
-  
-
-}
-
-.footer{
-    justify-self: flex-end;
 }
 
 #numbers{
@@ -39,30 +48,8 @@ body{
     flex-direction: column;
     width: 80%;
     margin: 0px;
-    flex-shrink: 1;
-    margin: 5px;
-    border: 1px red solid;
     height: 100%;
-  
-}
-
-
-
-#operators{
-    display: flex;
-    flex-direction: column;
- 
-}
-
-.operator{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#operators button{
-    width: 100%;
-    
+    padding: 0;
 }
 
 .rows{
@@ -70,16 +57,44 @@ body{
     width: 100%;
     justify-content: center;
     align-items: center;
-    border: 1px red solid;
-    height: 33%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .rows div{
-    width: 33%;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .rows button{
     width: 100%;
+    height: 100%;
+}
+
+
+#operators{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+ 
+}
+
+.operator{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#operators button{
+    width: 100%;
+    height: 100%;
+    
 }
 
 #top{
@@ -97,24 +112,30 @@ body{
 
 #display{
     text-align: right;
-    height: 80%;
-    margin: 5px;
+    height: 100%;
     width: 80%;
     border: 1px solid black;
-    padding: 0;
+    margin: 0px;
+    background-color: black;
+    color: aliceblue;
 
 }
 
 #clear{
-    height: 80%;
-    width:calc(20% - 5px); 
+    height: 100%;
+    width:20%; 
 }
 
 #clear button{
     height: 100%;
+    width: 100%;
     
 }
 
 
 
+.footer{
+    margin-top: auto;
+    text-align: center;
+}
 
