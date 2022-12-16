@@ -11,29 +11,88 @@ body{
     display: flex;
     flex-direction: column;
     width: 200px;
+    height: auto;
     justify-content: center;
     align-items: center;
     border: 2px solid black;
 }
-
-#display{
-    text-align: right;
-    border: 1px black solid;
-    margin: 5px;
-    height: 50px;
+#top{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
 }
 
 #buttons{
     display: flex;    
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
-#buttons button{
-    
-    padding: 10px;
+#display{
+    text-align: right;
+    height: 50px;
+    margin: 5px;
+    width: 150px;
+    border: 1px solid black;
 }
 
-#middleButtons{
+#c{
+    width: auto;
+    border: 1px red solid;
+}
+
+#top button{
+    width: 10%;
+    text-align: center;
+
+}
+
+#numbers{
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+width: 150px;
+margin: 5px;
+padding: 0;
+}
+
+#numbers div{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    padding: 1px;
+    margin: 0;
+    justify-content: center;
 }
+
+#numbers button{
+    width: 50px;
+}
+
+#operatorButtons button{
+    text-align: center;
+}
+
+#operatorButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    border: 1px red solid;
+}
+
+#operatorButtons div{
+    display: flex;
+    padding: 1px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin:auto;
+
+}
+oper
