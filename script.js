@@ -29,6 +29,7 @@ function operate(a, b, operator){
             break;
     }
     console.log(ans);
+    return ans;
 }
 (operate(5,7,'+'));
 (operate(5,7,'*'));
