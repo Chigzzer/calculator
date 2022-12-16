@@ -32,6 +32,41 @@ body{
     border: 2px solid black;
 }
 
+#top{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 20%;
+
+
+}
+
+#display{
+    text-align: right;
+    height: 100%;
+    width: 80%;
+    border: 1px solid black;
+    margin: 0px;
+    background-color: black;
+    color: aliceblue;
+
+}
+
+#clear{
+    height: 100%;
+    width:20%; 
+}
+
+#clear button{
+    height: 100%;
+    width: 100%;
+    
+}
+
 #bottom{
     display: flex;
     flex-direction: row;
@@ -96,43 +131,6 @@ body{
     height: 100%;
     
 }
-
-#top{
-    display: flex;
-    width: 100%;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    justify-content: space-between;
-    flex-direction: row;
-    height: 20%;
-
-
-}
-
-#display{
-    text-align: right;
-    height: 100%;
-    width: 80%;
-    border: 1px solid black;
-    margin: 0px;
-    background-color: black;
-    color: aliceblue;
-
-}
-
-#clear{
-    height: 100%;
-    width:20%; 
-}
-
-#clear button{
-    height: 100%;
-    width: 100%;
-    
-}
-
-
 
 .footer{
     margin-top: auto;
