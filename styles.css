@@ -46,13 +46,15 @@ body{
 }
 
 #display{
-    text-align: right;
     height: 100%;
     width: 80%;
     border: 1px solid black;
     margin: 0px;
     background-color: black;
     color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 
 }
 

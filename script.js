@@ -1,3 +1,82 @@
+const display = document.querySelector('#display');
+const numbers = document.querySelectorAll('.numberButton');
+const clear = document.querySelector('#clear');
+const operators = document.querySelectorAll('.operatorButton');
+numbers.forEach(element => element.addEventListener('click', numberClicked));
+operators.forEach(element => element.addEventListener('click', operatorClicked));
+clear.addEventListener('click', clearDisplay);
+
+let displayValue='';
+let summed = false;
+
+let sum = {  
+    numberOne: "",
+    numberTwo: "",
+    operatorSign: ""
+};
+
+function clearDisplay(){
+    displayValue ='';
+    sum.numberOne = '';
+    sum.numberTwo = '';
+    sum.operatorSign = '';
+    displayNumber();
+}
+
+function operatorClicked(){
+    console.log(`Here: ${sum.operatorSign}`);
+    if (this.value == '='){
+        if (sum.numberTwo == ''){
+            if (sum.numberOne == '') return;
+            else{
+                sum.numberTwo = displayValue;
+            }
+        };
+        displayValue = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
+        displayNumber();
+        console.log(`Present: ${sum.numberOne}| ${sum.numberTwo}| sign: ${sum.operatorSign} || ${displayValue}`);
+    }
+
+    else if (sum.operatorSign != ''){
+        console.log(`multi: ${sum.numberOne} |  ${displayValue}`);
+        sum.numberOne = operate(sum.numberOne, displayValue, sum.operatorSign);
+        sum.operatorSign = this.value;
+        sum.numberTwo = '';
+        displayValue = '';
+        displayNumber();
+    }
+
+    else {
+        sum.numberOne = displayValue;
+        console.log(`TEST: ${sum.numberOne}`);
+        if (sum.numberTwo != ''){
+            sum.operatorSign = this.value;
+            displayValue = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
+            displayNumber();
+        }
+        else{
+            sum.operatorSign = this.value;
+            display.innerText = '';
+        }
+        displayValue = '';
+    }
+}
+
+function numberClicked(){
+    if (summed == true){
+        displayValue = '';
+    }
+    summed = false;
+    displayValue = displayValue + this.value;
+    displayNumber();
+}
+
+function displayNumber(){
+    console.log(`displaying: ${displayValue}`)
+    display.innerText=displayValue;
+    return;
+}
+
 function add(a,b){
     return parseFloat(a) + parseFloat(b);
 }
@@ -13,6 +92,7 @@ function divide(a,b){
 
 
 function operate(a, b, operator){
+    console.log(`operating a: ${a} b: ${b} operator: ${operator}`);
     let ans;
     switch (operator){
         case '+':
@@ -28,10 +108,10 @@ function operate(a, b, operator){
             ans = divide(a,b);
             break;
     }
-    console.log(ans);
+    // console.log(ans);
+    sum.numberOne = '';
+    sum.numberTwo = '';
+    sum.operatorSign = '';
+    summed = true;
     return ans;
 }
-(operate(5,7,'+'));
-(operate(5,7,'*'));
-(operate(5,7,'-'));
-(operate(5,7,'/'));
