@@ -2,12 +2,18 @@ const display = document.querySelector('#display');
 const numbers = document.querySelectorAll('.numberButton');
 const clear = document.querySelector('#clear');
 const operators = document.querySelectorAll('.operatorButton');
+const buttons = Array.from(document.getElementsByTagName('button'));
+buttons.forEach(element => element.addEventListener('click', buttonClicked));
 numbers.forEach(element => element.addEventListener('click', numberClicked));
 operators.forEach(element => element.addEventListener('click', operatorClicked));
 clear.addEventListener('click', clearDisplay);
-
 let displayValue='';
 let summed = false;
+function buttonClicked(){
+    buttons.forEach(button =>button.classList.remove('clicked'));
+    this.classList.add('clicked');
+    return;
+}
 
 let sum = {  
     numberOne: "",
@@ -21,6 +27,7 @@ function clearDisplay(){
     sum.numberTwo = '';
     sum.operatorSign = '';
     displayNumber();
+    buttons.forEach(button =>button.classList.remove('clicked'));
 }
 
 function operatorClicked(){

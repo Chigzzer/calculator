@@ -89,6 +89,11 @@ body{
     padding: 0;
 }
 
+.clicked{
+    background-color: black;
+    color: white;
+}
+
 .rows{
     display: flex;
     width: 100%;
