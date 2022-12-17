@@ -53,17 +53,37 @@ body{
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    padding-right: 10px;
+}
+
+#resetButtons{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 20%;
 }
 
 #clear{
-    height: 100%;
-    width:20%; 
+    height: 50%;
+    width: 100%;
+    font-size: small; 
+}
+
+#delete{
+    height: 50%;
+    width: 100%;
+    font-size: small;
 }
 
 #clear button{
     height: 100%;
     width: 100%;
     
+}
+
+#delete button{
+    height: 100%;
+    width: 100%;
 }
 
 #bottom{

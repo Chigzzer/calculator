@@ -3,6 +3,7 @@ const display = document.querySelector('#display');
 const numbers = document.querySelectorAll('.numberButton');
 const clear = document.querySelector('#clear');
 const operators = document.querySelectorAll('.operatorButton');
+const del = document.querySelector('#delete');
 const buttons = Array.from(document.getElementsByTagName('button'));
 
 let displayValue='';
@@ -18,6 +19,7 @@ buttons.forEach(element => element.addEventListener('click', buttonClicked));
 numbers.forEach(element => element.addEventListener('click', numberClicked));
 operators.forEach(element => element.addEventListener('click', operatorClicked));
 clear.addEventListener('click', clearDisplay);
+del.addEventListener('click', deleteDigit);
 
 // Function for when each button is clicked
 function buttonClicked(){
@@ -37,6 +39,12 @@ function clearDisplay(){
     buttons.forEach(button =>button.classList.remove('clicked'));
 }
 
+function deleteDigit(){
+    displayValue = displayValue.slice(0, -1);
+    displayNumber();
+    buttons.forEach(button =>button.classList.remove('clicked'));   
+}
+
 // Function when any operator is clicked
 function operatorClicked(){
     if (this.value == '='){
@@ -52,11 +60,15 @@ function operatorClicked(){
 
 function equalClicked(){
     if (sum.numberTwo == ''){
-        if (sum.numberOne == '') return;
+        if (sum.numberOne == '') {
+            buttons.forEach(button =>button.classList.remove('clicked'));
+            return;
+        }
         sum.numberTwo = displayValue;
     };
     displayValue = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
     displayNumber();
+    
 }
 
 function multiOperator(element){
