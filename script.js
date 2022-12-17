@@ -1,27 +1,34 @@
+// Creating initial variables
 const display = document.querySelector('#display');
 const numbers = document.querySelectorAll('.numberButton');
 const clear = document.querySelector('#clear');
 const operators = document.querySelectorAll('.operatorButton');
 const buttons = Array.from(document.getElementsByTagName('button'));
-buttons.forEach(element => element.addEventListener('click', buttonClicked));
-numbers.forEach(element => element.addEventListener('click', numberClicked));
-operators.forEach(element => element.addEventListener('click', operatorClicked));
-clear.addEventListener('click', clearDisplay);
+
 let displayValue='';
 let summed = false;
-function buttonClicked(){
-    buttons.forEach(button =>button.classList.remove('clicked'));
-    this.classList.add('clicked');
-    return;
-}
-
 let sum = {  
     numberOne: "",
     numberTwo: "",
     operatorSign: ""
 };
 
+// Adding initial event listeners
+buttons.forEach(element => element.addEventListener('click', buttonClicked));
+numbers.forEach(element => element.addEventListener('click', numberClicked));
+operators.forEach(element => element.addEventListener('click', operatorClicked));
+clear.addEventListener('click', clearDisplay);
+
+// Function for when each button is clicked
+function buttonClicked(){
+    buttons.forEach(button =>button.classList.remove('clicked'));
+    this.classList.add('clicked');
+    return;
+}
+
+// Function to clear display and memory
 function clearDisplay(){
+    console.log('Clearing memory');
     displayValue ='';
     sum.numberOne = '';
     sum.numberTwo = '';
@@ -30,40 +37,8 @@ function clearDisplay(){
     buttons.forEach(button =>button.classList.remove('clicked'));
 }
 
-function equalClicked(){
-    if (sum.numberTwo == ''){
-        if (sum.numberOne == '') return;
-        sum.numberTwo = displayValue;
-    };
-    displayValue = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
-    displayNumber();
-    console.log(`Present: ${sum.numberOne}| ${sum.numberTwo}| sign: ${sum.operatorSign} || ${displayValue}`);
-}
-
-function multiOperator(element){
-    sum.numberTwo = displayValue;
-    if (sum.numberTwo == ''){
-        sum.operatorSign = element.value;
-        return;
-    }
-    console.log(`multi: ${sum.numberOne} |  ${displayValue}`);
-    sum.numberOne = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
-    sum.operatorSign = element.value;
-    sum.numberTwo = '';
-    displayValue = '';
-    displayNumber();
-}
-
-function singleOperator(element){
-    sum.numberOne = displayValue;
-    console.log(`TEST: ${sum.numberOne}`);
-    sum.operatorSign = element.value;
-    display.innerText = '';
-    displayValue = '';
-}
-
+// Function when any operator is clicked
 function operatorClicked(){
-    console.log(`Here: ${sum.operatorSign}`);
     if (this.value == '='){
         equalClicked();
     }
@@ -75,6 +50,36 @@ function operatorClicked(){
     }
 }
 
+function equalClicked(){
+    if (sum.numberTwo == ''){
+        if (sum.numberOne == '') return;
+        sum.numberTwo = displayValue;
+    };
+    displayValue = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
+    displayNumber();
+}
+
+function multiOperator(element){
+    sum.numberTwo = displayValue;
+    if (sum.numberTwo == ''){
+        sum.operatorSign = element.value;
+        return;
+    }
+    sum.numberOne = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
+    sum.operatorSign = element.value;
+    sum.numberTwo = '';
+    displayValue = '';
+    displayNumber();
+}
+
+function singleOperator(element){
+    sum.numberOne = displayValue;
+    sum.operatorSign = element.value;
+    display.innerText = '';
+    displayValue = '';
+}
+
+// Function when a number is clicked
 function numberClicked(){
     if (summed == true) displayValue = '';
     summed = false;
@@ -82,47 +87,49 @@ function numberClicked(){
     displayNumber();
 }
 
+// To display the current value onto the screen
 function displayNumber(){
-    console.log(`displaying: ${displayValue}`)
-    display.innerText=displayValue;
+    display.innerText = displayValue;
     return;
 }
 
+// Math functions
 function add(a,b){
+    console.log("Adding numbers together");
     return parseFloat(a) + parseFloat(b);
 }
+
 function multiply(a,b){
+    console.log("Multiplying numbers together");
     return parseFloat(a) * parseFloat(b);
 }
+
 function subtract(a,b){
+    console.log("Subtracting numbers together");
     return parseFloat(a) - parseFloat(b);
 }
+
 function divide(a,b){
+    console.log("Diving numbers together");
     return parseFloat((parseFloat(a) / parseFloat(b)).toFixed(2));
 }
 
-
+// To operate on two numbers
 function operate(a, b, operator){
-    console.log(`operating a: ${a} b: ${b} operator: ${operator}`);
+    console.log("Calculating answer");
     let ans;
-    switch (operator){
-        case '+':
-            ans= add(a,b);
-            break;
-        case '*':
-            ans = multiply(a,b);
-            break;
-        case '-':
-            ans = subtract(a,b);
-            break;
-        case '/':;
-            ans = divide(a,b);
-            break;
-    }
-    // console.log(ans);
     sum.numberOne = '';
     sum.numberTwo = '';
     sum.operatorSign = '';
     summed = true;
-    return ans;
+    switch (operator){
+        case '+':
+            return add(a,b);
+        case '*':
+            return multiply(a,b);
+        case '-':
+            return subtract(a,b);
+        case '/':;
+            return divide(a,b);
+    }
 }
