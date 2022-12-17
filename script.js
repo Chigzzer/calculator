@@ -14,6 +14,8 @@ let sum = {
     operatorSign: ""
 };
 
+
+
 // Adding initial event listeners
 buttons.forEach(element => element.addEventListener('click', buttonClicked));
 numbers.forEach(element => element.addEventListener('click', numberClicked));
@@ -22,10 +24,8 @@ clear.addEventListener('click', clearDisplay);
 del.addEventListener('click', deleteDigit);
 document.addEventListener('keydown', keyboardCheck)
 
-
+// Keyboard functionality 
 function keyboardCheck(e){
-    console.log(e.key);
-
     if ((e.key >= 0 && e.key <= 10) || e.key == '.'){
         let number = e.key;
         buttonClicked(number);
@@ -72,7 +72,8 @@ function buttonClicked(key){
     console.log(this.value == null);
     buttons.forEach(button =>button.classList.remove('clicked'));
     if (this.value == null){
-        console.log('test');
+        console.log(`b${key}`);
+        if(`b${key}` == 'bEnter') return;
         document.getElementById(`b${key}`).classList.add('clicked');
         return;
     }
@@ -163,6 +164,7 @@ function numberClicked(){
 
 // To display the current value onto the screen
 function displayNumber(){
+    if (displayValue.length > 10) return;
     display.innerText = displayValue;
     return;
 }
