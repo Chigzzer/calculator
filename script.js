@@ -31,7 +31,7 @@ function keyboardCheck(e){
         console.log(number);
         keyboardNumberClicked(number);
     }
-    else if (e.key == '/' || e.key == '*' || e.key == '-' || e.key == '+'){
+    else if (e.key == '/' || e.key == '*' || e.key == '-' || e.key == '+' || e.key == '='){
         keyboardOperatorClicked(e.key);
     }
 }
@@ -78,6 +78,10 @@ function clearDisplay(){
 }
 
 function deleteDigit(){
+    if (typeof displayValue == 'number') {
+        displayValue = displayValue.toString();
+    };
+    if (displayValue == '') return;
     displayValue = displayValue.slice(0, -1);
     displayNumber();
     buttons.forEach(button =>button.classList.remove('clicked'));   
