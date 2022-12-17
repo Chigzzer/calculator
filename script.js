@@ -24,20 +24,23 @@ document.addEventListener('keydown', keyboardCheck)
 
 
 function keyboardCheck(e){
-    console.log(e.key>=0);
+    console.log(e.key);
 
     if ((e.key >= 0 && e.key <= 10) || e.key == '.'){
         let number = e.key;
         console.log(number);
         keyboardNumberClicked(number);
     }
-    else if (e.key == '/' || e.key == '*' || e.key == '-' || e.key == '+' || e.key == '='){
+    else if (e.key == '/' || e.key == '*' || e.key == '-' || e.key == '+' || e.key == '=' || e.key == 'Enter'){
         keyboardOperatorClicked(e.key);
+    }
+    else if(e.key == 'Backspace'){
+        deleteDigit();
     }
 }
 
 function keyboardOperatorClicked(key){
-    if (key == '='){
+    if (key == '=' || key == 'Enter'){
         equalClicked();
     }
     else if (sum.operatorSign != ''){
