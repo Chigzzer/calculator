@@ -41,8 +41,6 @@ body{
     justify-content: space-between;
     flex-direction: row;
     height: 20%;
-
-
 }
 
 #display{
@@ -55,7 +53,6 @@ body{
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
 }
 
 #clear{

@@ -29,7 +29,7 @@ function buttonClicked(){
 // Function to clear display and memory
 function clearDisplay(){
     console.log('Clearing memory');
-    displayValue ='';
+    displayValue = '';
     sum.numberOne = '';
     sum.numberTwo = '';
     sum.operatorSign = '';
