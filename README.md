@@ -4,7 +4,6 @@
 ## What left to do
 - Keyboard support
 - Look of calculator
-- Adding a delete button
 
 # What I Learnt
 * How to use the switch function
