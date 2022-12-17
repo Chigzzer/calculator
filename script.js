@@ -82,6 +82,12 @@ function singleOperator(element){
 // Function when a number is clicked
 function numberClicked(){
     if (summed == true) displayValue = '';
+    if (this.value == "." ){
+        console.log(displayValue.indexOf('.'));
+        if (displayValue.indexOf('.') != -1){
+            return;
+        }
+    }
     summed = false;
     displayValue = displayValue + this.value;
     displayNumber();
@@ -129,7 +135,10 @@ function operate(a, b, operator){
             return multiply(a,b);
         case '-':
             return subtract(a,b);
-        case '/':;
+        case '/':
+            if (b == 0){
+                return "Infinity";
+            }
             return divide(a,b);
     }
 }
