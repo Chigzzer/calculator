@@ -45,6 +45,10 @@ function operatorClicked(){
     }
 
     else if (sum.operatorSign != ''){
+        if (sum.numberTwo == ''){
+            sum.operatorSign = this.value;
+            return;
+        }
         console.log(`multi: ${sum.numberOne} |  ${displayValue}`);
         sum.numberOne = operate(sum.numberOne, displayValue, sum.operatorSign);
         sum.operatorSign = this.value;
