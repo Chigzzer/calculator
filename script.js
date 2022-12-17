@@ -20,6 +20,44 @@ numbers.forEach(element => element.addEventListener('click', numberClicked));
 operators.forEach(element => element.addEventListener('click', operatorClicked));
 clear.addEventListener('click', clearDisplay);
 del.addEventListener('click', deleteDigit);
+document.addEventListener('keydown', keyboardCheck)
+
+
+function keyboardCheck(e){
+    console.log(e.key>=0);
+
+    if ((e.key >= 0 && e.key <= 10) || e.key == '.'){
+        let number = e.key;
+        console.log(number);
+        keyboardNumberClicked(number);
+    }
+    else if (e.key == '/' || e.key == '*' || e.key == '-' || e.key == '+'){
+        keyboardOperatorClicked(e.key);
+    }
+}
+
+function keyboardOperatorClicked(key){
+    if (key == '='){
+        equalClicked();
+    }
+    else if (sum.operatorSign != ''){
+        multiOperator(key);
+    }
+    else {
+        singleOperator(key);
+    }
+}
+
+function keyboardNumberClicked(number){
+    if (summed == true) displayValue = '';
+    if (number== "." ){
+        console.log(displayValue.indexOf('.'));
+        if (displayValue.indexOf('.') != -1) return;
+    }
+    summed = false;
+    displayValue = displayValue + number;
+    displayNumber();
+}
 
 // Function for when each button is clicked
 function buttonClicked(){
@@ -51,10 +89,10 @@ function operatorClicked(){
         equalClicked();
     }
     else if (sum.operatorSign != ''){
-        multiOperator(this);
+        multiOperator(this.value);
     }
     else {
-        singleOperator(this);
+        singleOperator(this.value);
     }
 }
 
@@ -78,7 +116,7 @@ function multiOperator(element){
         return;
     }
     sum.numberOne = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
-    sum.operatorSign = element.value;
+    sum.operatorSign = element;
     sum.numberTwo = '';
     displayValue = '';
     displayNumber();
@@ -86,7 +124,7 @@ function multiOperator(element){
 
 function singleOperator(element){
     sum.numberOne = displayValue;
-    sum.operatorSign = element.value;
+    sum.operatorSign = element;
     display.innerText = '';
     displayValue = '';
 }
@@ -134,7 +172,7 @@ function divide(a,b){
 
 // To operate on two numbers
 function operate(a, b, operator){
-    console.log("Calculating answer");
+    console.log(`Calculating answer: ${a} ${b} ${operator}`);
     let ans;
     sum.numberOne = '';
     sum.numberTwo = '';
