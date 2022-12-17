@@ -28,14 +28,19 @@ function keyboardCheck(e){
 
     if ((e.key >= 0 && e.key <= 10) || e.key == '.'){
         let number = e.key;
+        buttonClicked(number);
         console.log(number);
         keyboardNumberClicked(number);
     }
     else if (e.key == '/' || e.key == '*' || e.key == '-' || e.key == '+' || e.key == '=' || e.key == 'Enter'){
+        buttonClicked(e.key);
         keyboardOperatorClicked(e.key);
     }
-    else if(e.key == 'Backspace'){
+    else if (e.key == 'Backspace'){
         deleteDigit();
+    }
+    else if (e.key == 'Escape'){
+        clearDisplay();
     }
 }
 
@@ -63,8 +68,14 @@ function keyboardNumberClicked(number){
 }
 
 // Function for when each button is clicked
-function buttonClicked(){
+function buttonClicked(key){
+    console.log(this.value == null);
     buttons.forEach(button =>button.classList.remove('clicked'));
+    if (this.value == null){
+        console.log('test');
+        document.getElementById(`b${key}`).classList.add('clicked');
+        return;
+    }
     this.classList.add('clicked');
     return;
 }
@@ -81,8 +92,8 @@ function clearDisplay(){
 }
 
 function deleteDigit(){
-    if (typeof displayValue == 'number') {
-        displayValue = displayValue.toString();
+    if (summed == true) {
+        clearDisplay();
     };
     if (displayValue == '') return;
     displayValue = displayValue.slice(0, -1);
