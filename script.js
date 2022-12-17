@@ -69,7 +69,6 @@ function keyboardNumberClicked(number){
 
 // Function for when each button is clicked
 function buttonClicked(key){
-    console.log(this.value == null);
     buttons.forEach(button =>button.classList.remove('clicked'));
     if (this.value == null){
         console.log(`b${key}`);
