@@ -30,53 +30,53 @@ function clearDisplay(){
     buttons.forEach(button =>button.classList.remove('clicked'));
 }
 
+function equalClicked(){
+    if (sum.numberTwo == ''){
+        if (sum.numberOne == '') return;
+        sum.numberTwo = displayValue;
+    };
+    displayValue = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
+    displayNumber();
+    console.log(`Present: ${sum.numberOne}| ${sum.numberTwo}| sign: ${sum.operatorSign} || ${displayValue}`);
+}
+
+function multiOperator(element){
+    sum.numberTwo = displayValue;
+    if (sum.numberTwo == ''){
+        sum.operatorSign = element.value;
+        return;
+    }
+    console.log(`multi: ${sum.numberOne} |  ${displayValue}`);
+    sum.numberOne = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
+    sum.operatorSign = element.value;
+    sum.numberTwo = '';
+    displayValue = '';
+    displayNumber();
+}
+
+function singleOperator(element){
+    sum.numberOne = displayValue;
+    console.log(`TEST: ${sum.numberOne}`);
+    sum.operatorSign = element.value;
+    display.innerText = '';
+    displayValue = '';
+}
+
 function operatorClicked(){
     console.log(`Here: ${sum.operatorSign}`);
     if (this.value == '='){
-        if (sum.numberTwo == ''){
-            if (sum.numberOne == '') return;
-            else{
-                sum.numberTwo = displayValue;
-            }
-        };
-        displayValue = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
-        displayNumber();
-        console.log(`Present: ${sum.numberOne}| ${sum.numberTwo}| sign: ${sum.operatorSign} || ${displayValue}`);
+        equalClicked();
     }
-
     else if (sum.operatorSign != ''){
-        if (sum.numberTwo == ''){
-            sum.operatorSign = this.value;
-            return;
-        }
-        console.log(`multi: ${sum.numberOne} |  ${displayValue}`);
-        sum.numberOne = operate(sum.numberOne, displayValue, sum.operatorSign);
-        sum.operatorSign = this.value;
-        sum.numberTwo = '';
-        displayValue = '';
-        displayNumber();
+        multiOperator(this);
     }
-
     else {
-        sum.numberOne = displayValue;
-        console.log(`TEST: ${sum.numberOne}`);
-        if (sum.numberTwo != ''){
-            sum.operatorSign = this.value;
-            displayValue = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
-            displayNumber();
-        }
-        else{
-            sum.operatorSign = this.value;
-            display.innerText = '';
-        }
-        displayValue = '';
+        singleOperator(this);
     }
 }
 
 function numberClicked(){
-    if (summed == true){
-        displayValue = '';
-    }
+    if (summed == true) displayValue = '';
     summed = false;
     displayValue = displayValue + this.value;
     displayNumber();
