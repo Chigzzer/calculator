@@ -28,16 +28,21 @@ document.addEventListener('keydown', keyboardCheck)
 // Keyboard functionality 
 function keyboardCheck(e){
     e.preventDefault();
-    if (e.key != '=' || e.key != 'Enter' || e.key != 'Backspace' || e.key != 'Escape'){
-        lastButton = e.key;
-    }
     if ((e.key >= 0 && e.key <= 10) || e.key == '.'){
+        lastButton = e.key;
         let number = e.key;
         buttonClicked(number);
         console.log(number);
         keyboardNumberClicked(number);
     }
     else if (e.key == '/' || e.key == '*' || e.key == '-' || e.key == '+' || e.key == '=' || e.key == 'Enter'){
+        if (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+'){
+            displayValue = sum.numberOne;
+            sum.numberOne ='';
+            sum.operatorSign ='';
+        }
+        
+        lastButton = e.key;
         buttonClicked(e.key);
         keyboardOperatorClicked(e.key);
     }
@@ -111,6 +116,11 @@ function deleteDigit(){
 
 // Function when any operator is clicked
 function operatorClicked(){
+    if (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+'){
+        displayValue = sum.numberOne;
+        sum.numberOne ='';
+        sum.operatorSign ='';
+    }
     if (this.value == '='){
         equalClicked();
     }

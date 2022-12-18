@@ -6,6 +6,7 @@
 
 ## What left to do
 - Look of calculator
+- Bug when clicking two operators in a row
 
 # What I Learnt
 * How to use the switch function
