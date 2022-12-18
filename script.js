@@ -5,7 +5,6 @@ const clear = document.querySelector('#clear');
 const operators = document.querySelectorAll('.operatorButton');
 const del = document.querySelector('#delete');
 const buttons = Array.from(document.getElementsByTagName('button'));
-const equal = document.querySelector('#equal');
 
 let displayValue='';
 let summed = false;
@@ -21,7 +20,6 @@ buttons.forEach(element => element.addEventListener('mousedown', buttonClicked))
 numbers.forEach(element => element.addEventListener('mouseup', buttonClickedRemove));
 numbers.forEach(element => element.addEventListener('click', numberClicked));
 operators.forEach(element => element.addEventListener('click', operatorClicked));
-equal.addEventListener('mouseup', buttonClickedRemove);
 clear.addEventListener('click', clearDisplay);
 del.addEventListener('click', deleteDigit);
 document.addEventListener('keydown', keyboardCheck)
