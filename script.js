@@ -126,13 +126,18 @@ function operatorClicked(){
 
 function equalClicked(){
     console.log(lastButton);
-    if (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+') return;
+    //if (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+') return;
     if (sum.numberTwo == ''){
         if (sum.numberOne == '') {
             buttons.forEach(button =>button.classList.remove('clicked'));
             return;
         }
-        sum.numberTwo = displayValue;
+        if (displayValue == ''){
+            sum.numberTwo = sum.numberOne;
+        }
+        else{
+            sum.numberTwo = displayValue;
+        }
     };
     displayValue = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
     displayNumber();
@@ -149,13 +154,13 @@ function multiOperator(element){
     sum.operatorSign = element;
     sum.numberTwo = '';
     displayValue = '';
-    displayNumber();
+    //displayNumber();
 }
 
 function singleOperator(element){
     sum.numberOne = displayValue;
     sum.operatorSign = element;
-    display.innerText = '';
+    //display.innerText = '';
     displayValue = '';
 }
 
