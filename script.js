@@ -26,6 +26,7 @@ document.addEventListener('keydown', keyboardCheck)
 
 // Keyboard functionality 
 function keyboardCheck(e){
+    e.preventDefault();
     if ((e.key >= 0 && e.key <= 10) || e.key == '.'){
         let number = e.key;
         buttonClicked(number);
@@ -72,7 +73,10 @@ function buttonClicked(key){
     buttons.forEach(button =>button.classList.remove('clicked'));
     if (this.value == null){
         console.log(`b${key}`);
-        if(`b${key}` == 'bEnter') return;
+        if(`b${key}` == 'bEnter'){
+            document.getElementById('b=').classList.add('clicked');
+            return;
+        } 
         document.getElementById(`b${key}`).classList.add('clicked');
         return;
     }
