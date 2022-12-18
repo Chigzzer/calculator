@@ -74,12 +74,9 @@ function keyboardOperatorClicked(key){
 
 function keyboardNumberClicked(number){
     if (summed == true) displayValue = '';
-    if (number== "." ){
-        console.log(displayValue.indexOf('.'));
-        if (displayValue.indexOf('.') != -1) return;
-    }
+    if (number== "."  && displayValue.indexOf('.') != -1) return;
     summed = false;
-    displayValue = displayValue + number;
+    displayValue += number;
     displayNumber();
 }
 
@@ -125,16 +122,14 @@ function operatorClicked(){
         sum.numberOne ='';
         sum.operatorSign ='';
     }
-    if (this.value == '='){
-        equalClicked();
-    }
+    if (this.value == '=') equalClicked();
     else if (sum.operatorSign != ''){
         lastButton = this.value;
         multiOperator(this.value);
     }
     else {
-        singleOperator(this.value);
         lastButton = this.value;
+        singleOperator(this.value);
     }
 }
 
@@ -145,13 +140,12 @@ function equalClicked(){
             return;
         }
         if (displayValue == ''){
-            sum.numberTwo = sum.numberOne;
+            displayValue = operate(sum.numberOne, sum.numberOne, sum.operatorSign);
         }
         else{
-            sum.numberTwo = displayValue;
+            displayValue = operate(sum.numberOne, displayValue, sum.operatorSign);
         }
     };
-    displayValue = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
     displayNumber();
     
 }
@@ -172,14 +166,9 @@ function singleOperator(element){
 function numberClicked(){
     lastButton = this.value;
     if (summed == true) displayValue = '';
-    if (this.value == "." ){
-        console.log(displayValue.indexOf('.'));
-        if (displayValue.indexOf('.') != -1){
-            return;
-        }
-    }
+    if (this.value == "." && displayValue.indexOf('.') != -1) return;
     summed = false;
-    displayValue = displayValue + this.value;
+    displayValue += this.value;
     displayNumber();
 }
 
@@ -214,7 +203,6 @@ function divide(a,b){
 // To operate on two numbers
 function operate(a, b, operator){
     console.log(`Calculating answer: ${a} ${b} ${operator}`);
-    let ans;
     sum.numberOne = '';
     sum.numberTwo = '';
     sum.operatorSign = '';
