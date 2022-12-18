@@ -61,7 +61,7 @@ function keyboardCheck(e){
 }
 
 function keyboardOperatorClicked(key){
-    if (key == '=' || key == 'Enter'){
+    if (key == '='){
         equalClicked();
     }
     else if (sum.operatorSign != ''){
@@ -87,11 +87,6 @@ function keyboardNumberClicked(number){
 function buttonClicked(key){
     buttons.forEach(button =>button.classList.remove('clicked'));
     if (this.value == null){
-        console.log(`b${key}`);
-        if(`b${key}` == 'bEnter'){
-            document.getElementById('b=').classList.add('clicked');
-            return;
-        } 
         document.getElementById(`b${key}`).classList.add('clicked');
         return;
     }
