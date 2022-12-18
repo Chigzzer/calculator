@@ -5,6 +5,7 @@ const clear = document.querySelector('#clear');
 const operators = document.querySelectorAll('.operatorButton');
 const del = document.querySelector('#delete');
 const buttons = Array.from(document.getElementsByTagName('button'));
+const calculator = document.querySelector('#calculator');
 
 let displayValue='';
 let summed = false;
@@ -22,7 +23,9 @@ numbers.forEach(element => element.addEventListener('click', numberClicked));
 operators.forEach(element => element.addEventListener('click', operatorClicked));
 clear.addEventListener('click', clearDisplay);
 del.addEventListener('click', deleteDigit);
-document.addEventListener('keydown', keyboardCheck)
+calculator.addEventListener('keydown', keyboardCheck)
+display.addEventListener('keydown', keyboardCheck)
+
 
 // Keyboard functionality 
 function keyboardCheck(e){
