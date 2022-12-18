@@ -28,28 +28,34 @@ document.addEventListener('keydown', keyboardCheck)
 // Keyboard functionality 
 function keyboardCheck(e){
     e.preventDefault();
-    if ((e.key >= 0 && e.key <= 10) || e.key == '.'){
-        lastButton = e.key;
-        let number = e.key;
+    let keyPressed = e.key;
+    console.log(keyPressed);
+    if (keyPressed == 'Enter') keyPressed = '=';
+    if ((keyPressed >= 0 && keyPressed <= 10) || keyPressed == '.'){
+        lastButton = keyPressed;
+        let number = keyPressed;
         buttonClicked(number);
         console.log(number);
         keyboardNumberClicked(number);
     }
-    else if (e.key == '/' || e.key == '*' || e.key == '-' || e.key == '+' || e.key == '=' || e.key == 'Enter'){
-        if (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+'){
+    else if (keyPressed == '/' || keyPressed == '*' || keyPressed == '-' || keyPressed == '+' || keyPressed == '='){
+        if ((keyPressed != '=') && (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+')){
+            if (summed == true){
+                sum.numberOne = displayValue;
+            }
             displayValue = sum.numberOne;
-            sum.numberOne ='';
-            sum.operatorSign ='';
+            //sum.numberOne ='';
+            //sum.operatorSign ='';
         }
         
-        lastButton = e.key;
-        buttonClicked(e.key);
-        keyboardOperatorClicked(e.key);
+        lastButton = keyPressed;
+        buttonClicked(keyPressed);
+        keyboardOperatorClicked(keyPressed);
     }
-    else if (e.key == 'Backspace'){
+    else if (keyPressed == 'Backspace'){
         deleteDigit();
     }
-    else if (e.key == 'Escape'){
+    else if (keyPressed == 'Escape'){
         clearDisplay();
     }
 }
@@ -116,7 +122,10 @@ function deleteDigit(){
 
 // Function when any operator is clicked
 function operatorClicked(){
-    if (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+'){
+    if ((this.value != '=' ) && (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+')){
+        if (summed == true){
+            sum.numberOne = displayValue;
+        }
         displayValue = sum.numberOne;
         sum.numberOne ='';
         sum.operatorSign ='';
