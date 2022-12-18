@@ -135,8 +135,6 @@ function operatorClicked(){
 }
 
 function equalClicked(){
-    console.log(lastButton);
-    //if (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+') return;
     if (sum.numberTwo == ''){
         if (sum.numberOne == '') {
             buttons.forEach(button =>button.classList.remove('clicked'));
@@ -155,22 +153,14 @@ function equalClicked(){
 }
 
 function multiOperator(element){
-    sum.numberTwo = displayValue;
-    if (sum.numberTwo == ''){
-        sum.operatorSign = element.value;
-        return;
-    }
-    sum.numberOne = operate(sum.numberOne, sum.numberTwo, sum.operatorSign);
+    sum.numberOne = operate(sum.numberOne, displayValue, sum.operatorSign);
     sum.operatorSign = element;
-    sum.numberTwo = '';
     displayValue = '';
-    //displayNumber();
 }
 
 function singleOperator(element){
     sum.numberOne = displayValue;
     sum.operatorSign = element;
-    //display.innerText = '';
     displayValue = '';
 }
 
