@@ -5,6 +5,7 @@ const clear = document.querySelector('#clear');
 const operators = document.querySelectorAll('.operatorButton');
 const del = document.querySelector('#delete');
 const buttons = Array.from(document.getElementsByTagName('button'));
+const equal = document.querySelector('#equal');
 
 let displayValue='';
 let summed = false;
@@ -20,6 +21,7 @@ buttons.forEach(element => element.addEventListener('mousedown', buttonClicked))
 numbers.forEach(element => element.addEventListener('mouseup', buttonClickedRemove));
 numbers.forEach(element => element.addEventListener('click', numberClicked));
 operators.forEach(element => element.addEventListener('click', operatorClicked));
+equal.addEventListener('mouseup', buttonClickedRemove);
 clear.addEventListener('click', clearDisplay);
 del.addEventListener('click', deleteDigit);
 document.addEventListener('keydown', keyboardCheck)
@@ -29,16 +31,16 @@ function keyboardCheck(e){
     e.preventDefault();
     let keyPressed = e.key;
     console.log(keyPressed);
-    if (keyPressed == 'Enter') keyPressed = '=';
+    if (keyPressed == 'Enter' || keyPressed == '=') keyPressed = 'equal';
     if ((keyPressed >= 0 && keyPressed <= 10) || keyPressed == '.'){
         lastButton = keyPressed;
         buttonClicked(keyPressed);
         keyboardNumberClicked(keyPressed);
     }
-    else if (keyPressed == '/' || keyPressed == '*' || keyPressed == '-' || keyPressed == '+' || keyPressed == '='){
+    else if (keyPressed == '/' || keyPressed == '*' || keyPressed == '-' || keyPressed == '+' || keyPressed == 'equal'){
         buttonClicked(keyPressed);
         if (displayValue == '') return;
-        if ((keyPressed != '=') && (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+')){
+        if ((keyPressed != 'equal') && (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+')){
             if (summed == true){
                 sum.numberOne = displayValue;
             }
@@ -56,7 +58,7 @@ function keyboardCheck(e){
 }
 
 function keyboardOperatorClicked(key){
-    if (key == '='){
+    if (key == 'equal'){
         equalClicked();
     }
     else if (sum.operatorSign != ''){
@@ -114,7 +116,7 @@ function deleteDigit(){
 
 // Function when any operator is clicked
 function operatorClicked(){
-    if ((this.value != '=' ) && (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+')){
+    if ((this.value != 'equal' ) && (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+')){
         if (summed == true){
             sum.numberOne = displayValue;
         }
@@ -122,7 +124,7 @@ function operatorClicked(){
         sum.numberOne ='';
         sum.operatorSign ='';
     }
-    if (this.value == '=') equalClicked();
+    if (this.value == 'equal') equalClicked();
     else if (sum.operatorSign != ''){
         lastButton = this.value;
         multiOperator(this.value);
