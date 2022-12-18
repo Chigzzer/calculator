@@ -15,8 +15,6 @@ let sum = {
     operatorSign: ""
 };
 
-
-
 // Adding initial event listeners
 buttons.forEach(element => element.addEventListener('click', buttonClicked));
 numbers.forEach(element => element.addEventListener('click', numberClicked));
@@ -33,10 +31,8 @@ function keyboardCheck(e){
     if (keyPressed == 'Enter') keyPressed = '=';
     if ((keyPressed >= 0 && keyPressed <= 10) || keyPressed == '.'){
         lastButton = keyPressed;
-        let number = keyPressed;
-        buttonClicked(number);
-        console.log(number);
-        keyboardNumberClicked(number);
+        buttonClicked(keyPressed);
+        keyboardNumberClicked(keyPressed);
     }
     else if (keyPressed == '/' || keyPressed == '*' || keyPressed == '-' || keyPressed == '+' || keyPressed == '='){
         if ((keyPressed != '=') && (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+')){
@@ -44,10 +40,7 @@ function keyboardCheck(e){
                 sum.numberOne = displayValue;
             }
             displayValue = sum.numberOne;
-            //sum.numberOne ='';
-            //sum.operatorSign ='';
         }
-        
         lastButton = keyPressed;
         buttonClicked(keyPressed);
         keyboardOperatorClicked(keyPressed);
