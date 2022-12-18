@@ -8,6 +8,7 @@ const buttons = Array.from(document.getElementsByTagName('button'));
 
 let displayValue='';
 let summed = false;
+let lastButton = '';
 let sum = {  
     numberOne: "",
     numberTwo: "",
@@ -27,6 +28,9 @@ document.addEventListener('keydown', keyboardCheck)
 // Keyboard functionality 
 function keyboardCheck(e){
     e.preventDefault();
+    if (e.key != '=' || e.key != 'Enter' || e.key != 'Backspace' || e.key != 'Escape'){
+        lastButton = e.key;
+    }
     if ((e.key >= 0 && e.key <= 10) || e.key == '.'){
         let number = e.key;
         buttonClicked(number);
@@ -111,14 +115,18 @@ function operatorClicked(){
         equalClicked();
     }
     else if (sum.operatorSign != ''){
+        lastButton = this.value;
         multiOperator(this.value);
     }
     else {
         singleOperator(this.value);
+        lastButton = this.value;
     }
 }
 
 function equalClicked(){
+    console.log(lastButton);
+    if (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+') return;
     if (sum.numberTwo == ''){
         if (sum.numberOne == '') {
             buttons.forEach(button =>button.classList.remove('clicked'));
@@ -153,6 +161,7 @@ function singleOperator(element){
 
 // Function when a number is clicked
 function numberClicked(){
+    lastButton = this.value;
     if (summed == true) displayValue = '';
     if (this.value == "." ){
         console.log(displayValue.indexOf('.'));
