@@ -16,7 +16,8 @@ let sum = {
 };
 
 // Adding initial event listeners
-buttons.forEach(element => element.addEventListener('click', buttonClicked));
+buttons.forEach(element => element.addEventListener('mousedown', buttonClicked));
+numbers.forEach(element => element.addEventListener('mouseup', buttonClickedRemove));
 numbers.forEach(element => element.addEventListener('click', numberClicked));
 operators.forEach(element => element.addEventListener('click', operatorClicked));
 clear.addEventListener('click', clearDisplay);
@@ -35,6 +36,8 @@ function keyboardCheck(e){
         keyboardNumberClicked(keyPressed);
     }
     else if (keyPressed == '/' || keyPressed == '*' || keyPressed == '-' || keyPressed == '+' || keyPressed == '='){
+        buttonClicked(keyPressed);
+        if (displayValue == '') return;
         if ((keyPressed != '=') && (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+')){
             if (summed == true){
                 sum.numberOne = displayValue;
@@ -42,7 +45,6 @@ function keyboardCheck(e){
             displayValue = sum.numberOne;
         }
         lastButton = keyPressed;
-        buttonClicked(keyPressed);
         keyboardOperatorClicked(keyPressed);
     }
     else if (keyPressed == 'Backspace'){
@@ -81,7 +83,12 @@ function buttonClicked(key){
         return;
     }
     this.classList.add('clicked');
+
     return;
+}
+
+function buttonClickedRemove(){
+    numbers.forEach(button =>button.classList.remove('clicked'));
 }
 
 // Function to clear display and memory
@@ -96,13 +103,13 @@ function clearDisplay(){
 }
 
 function deleteDigit(){
+    buttons.forEach(button =>button.classList.remove('clicked'));   
     if (summed == true) {
         clearDisplay();
     };
     if (displayValue == '') return;
     displayValue = displayValue.slice(0, -1);
     displayNumber();
-    buttons.forEach(button =>button.classList.remove('clicked'));   
 }
 
 // Function when any operator is clicked
@@ -121,6 +128,7 @@ function operatorClicked(){
         multiOperator(this.value);
     }
     else {
+        if (displayValue == '') return;
         lastButton = this.value;
         singleOperator(this.value);
     }
@@ -167,7 +175,12 @@ function numberClicked(){
 
 // To display the current value onto the screen
 function displayNumber(){
-    if (displayValue.length > 10) return;
+    displayValue = displayValue.toString();
+    console.log(displayValue.length);
+    if (displayValue.length > 10){
+        displayValue = displayValue.substring(0, 10);
+    };
+
     display.innerText = displayValue;
     return;
 }
@@ -190,7 +203,7 @@ function subtract(a,b){
 
 function divide(a,b){
     console.log("Diving numbers together");
-    return parseFloat((parseFloat(a) / parseFloat(b)).toFixed(2));
+    return parseFloat((parseFloat(a) / parseFloat(b)).toFixed(9));
 }
 
 // To operate on two numbers
