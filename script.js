@@ -24,7 +24,7 @@ operators.forEach(element => element.addEventListener('click', operatorClicked))
 clear.addEventListener('click', clearDisplay);
 del.addEventListener('click', deleteDigit);
 document.addEventListener('keydown', keyboardCheck)
-//display.addEventListener('keydown', keyboardCheck)
+
 
 
 // Keyboard functionality 
