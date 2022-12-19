@@ -23,13 +23,12 @@ numbers.forEach(element => element.addEventListener('click', numberClicked));
 operators.forEach(element => element.addEventListener('click', operatorClicked));
 clear.addEventListener('click', clearDisplay);
 del.addEventListener('click', deleteDigit);
-calculator.addEventListener('keydown', keyboardCheck)
-display.addEventListener('keydown', keyboardCheck)
+document.addEventListener('keydown', keyboardCheck)
+//display.addEventListener('keydown', keyboardCheck)
 
 
 // Keyboard functionality 
 function keyboardCheck(e){
-    e.preventDefault();
     let keyPressed = e.key;
     console.log(keyPressed);
     if (keyPressed == 'Enter' || keyPressed == '=') keyPressed = 'equal';
@@ -39,6 +38,7 @@ function keyboardCheck(e){
         keyboardNumberClicked(keyPressed);
     }
     else if (keyPressed == '/' || keyPressed == '*' || keyPressed == '-' || keyPressed == '+' || keyPressed == 'equal'){
+        e.preventDefault();
         buttonClicked(keyPressed);
         if (displayValue == '') return;
         if ((keyPressed != 'equal') && (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+')){
