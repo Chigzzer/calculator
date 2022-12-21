@@ -40,7 +40,6 @@ function keyboardCheck(e){
     else if (keyPressed == '/' || keyPressed == '*' || keyPressed == '-' || keyPressed == '+' || keyPressed == 'equal'){
         e.preventDefault();
         buttonClicked(keyPressed);
-        if (displayValue == '') return;
         if ((keyPressed != 'equal') && (lastButton == '/' || lastButton == '*' || lastButton == '-' || lastButton == '+')){
             if (summed == true){
                 sum.numberOne = displayValue;
